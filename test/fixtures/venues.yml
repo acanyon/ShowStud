@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  genres: MyString
+  ambiance: MyString
+  price: 1
+  neighborhood: MyString
+  age: MyString
+  ticket_source: MyString
+  ticket_venue_url: MyString
+  venue_url: MyString
+  yelp_url: MyString
+
+two:
+  name: MyString
+  genres: MyString
+  ambiance: MyString
+  price: 1
+  neighborhood: MyString
+  age: MyString
+  ticket_source: MyString
+  ticket_venue_url: MyString
+  venue_url: MyString
+  yelp_url: MyString
