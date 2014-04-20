@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419221656) do
+ActiveRecord::Schema.define(version: 20140419233638) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140419221656) do
     t.string   "yelp_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ticketfly_venue_id"
   end
 
 end
