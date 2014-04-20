@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ticket_id: 
+  ticket_url: 
+  date: 2014-04-19 17:56:23
+  status: MyString
+  price: MyString
+  age: MyString
+  headliner_name: MyString
+  support_name: MyString
+  facebook_event_id: MyString
+  ticket_source: MyString
+  venue_event_url: MyString
+
+two:
+  ticket_id: 
+  ticket_url: 
+  date: 2014-04-19 17:56:23
+  status: MyString
+  price: MyString
+  age: MyString
+  headliner_name: MyString
+  support_name: MyString
+  facebook_event_id: MyString
+  ticket_source: MyString
+  venue_event_url: MyString

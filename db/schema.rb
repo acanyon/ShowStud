@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419233638) do
+ActiveRecord::Schema.define(version: 20140420013521) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -45,6 +45,23 @@ ActiveRecord::Schema.define(version: 20140419233638) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+
+  create_table "events", force: true do |t|
+    t.string   "ticket_id"
+    t.string   "ticket_url"
+    t.datetime "date"
+    t.string   "status"
+    t.string   "price"
+    t.string   "age"
+    t.string   "headliner_name"
+    t.string   "support_name"
+    t.string   "facebook_event_id"
+    t.string   "ticket_source"
+    t.string   "venue_event_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "venue_id"
+  end
 
   create_table "venues", force: true do |t|
     t.string   "name"
