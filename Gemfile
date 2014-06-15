@@ -6,6 +6,7 @@ gem 'rails', '4.0.0'
 ### My Added Deps
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem "json"
+gem 'soundcloud'
 
 
 
