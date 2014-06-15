@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615201520) do
+ActiveRecord::Schema.define(version: 20140615221236) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -69,6 +69,24 @@ ActiveRecord::Schema.define(version: 20140615201520) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "venue_id"
+  end
+
+  create_table "tracks", force: true do |t|
+    t.integer  "artist_id"
+    t.integer  "sc_id"
+    t.integer  "duration"
+    t.string   "sc_permalink_uri"
+    t.boolean  "sc_streamable"
+    t.string   "sc_embeddable_by"
+    t.string   "sc_genre"
+    t.string   "sc_title"
+    t.string   "title"
+    t.string   "sc_artwork_url"
+    t.string   "sc_stream_url"
+    t.integer  "sc_playback_count"
+    t.integer  "sc_favoritings_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "venues", force: true do |t|

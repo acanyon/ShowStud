@@ -7,6 +7,7 @@ gem 'rails', '4.0.0'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem "json"
 gem 'soundcloud'
+gem 'pry'
 
 
 
