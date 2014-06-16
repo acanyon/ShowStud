@@ -11,22 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616010905) do
-
-  create_table "active_admin_comments", force: true do |t|
-    t.string   "namespace"
-    t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+ActiveRecord::Schema.define(version: 20140616041814) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -47,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140616010905) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "artists", force: true do |t|
-    t.string   "name"
+    t.text     "name",          limit: 255
     t.integer  "soundcloud_id"
     t.integer  "event_id"
     t.datetime "created_at"
@@ -56,16 +41,16 @@ ActiveRecord::Schema.define(version: 20140616010905) do
 
   create_table "events", force: true do |t|
     t.string   "ticket_id"
-    t.string   "ticket_url"
+    t.text     "ticket_url",        limit: 255
     t.datetime "date"
     t.string   "status"
     t.string   "price"
     t.string   "age"
-    t.string   "headliner_name"
-    t.string   "support_name"
+    t.text     "headliner_name",    limit: 255
+    t.text     "support_name",      limit: 255
     t.string   "facebook_event_id"
     t.string   "ticket_source"
-    t.string   "venue_event_url"
+    t.text     "venue_event_url",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "venue_id"
@@ -75,14 +60,14 @@ ActiveRecord::Schema.define(version: 20140616010905) do
     t.integer  "artist_id"
     t.integer  "sc_id"
     t.integer  "duration"
-    t.string   "sc_permalink_uri"
+    t.text     "sc_permalink_uri",     limit: 255
     t.boolean  "sc_streamable"
     t.string   "sc_embeddable_by"
     t.string   "sc_genre"
-    t.string   "sc_title"
-    t.string   "title"
-    t.string   "sc_artwork_url"
-    t.string   "sc_stream_url"
+    t.text     "sc_title",             limit: 255
+    t.text     "title",                limit: 255
+    t.text     "sc_artwork_url",       limit: 255
+    t.text     "sc_stream_url",        limit: 255
     t.integer  "sc_playback_count"
     t.integer  "sc_favoritings_count"
     t.datetime "created_at"
@@ -99,9 +84,9 @@ ActiveRecord::Schema.define(version: 20140616010905) do
     t.string   "neighborhood"
     t.string   "age"
     t.string   "ticket_source"
-    t.string   "ticket_venue_url"
-    t.string   "venue_url"
-    t.string   "yelp_url"
+    t.text     "ticket_venue_url",   limit: 255
+    t.text     "venue_url",          limit: 255
+    t.text     "yelp_url",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ticketfly_venue_id"
