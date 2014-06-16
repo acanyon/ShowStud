@@ -8,25 +8,70 @@ namespace :events do
     task :link_soundcloud => :environment do
         client = SoundCloud.new(:client_id => '23db025bb77050582169820faaeb6bab')
 
-        Artist.where(soundcloud_id: nil).all().each do |artist|
-            puts "Entering info for Artist: '" + artist.name + "'"
+        Artist.where(soundcloud_id: nil).includes(:event).all().each do |artist|
+            if artist.event.date < Date.today
+                next
+            end
+            puts "Edit info for Artist: '" + artist.name + "'"
+            puts "    #{artist.event.ticket_url}"
+
+            print " What would you like to do? ('continue', 'split' (on commas), 'modify' (name), 'delete': "
+            cmd = STDIN.gets.chomp.strip
+
+            if cmd == 'split' || cmd == 's'
+                new_artists = artist.name.split(',').map(&:strip).map do |new_name|
+                    Artist.create!(event: artist.event, name: new_name)
+                end
+                artist.delete
+                puts
+                puts 'Created new artists by name: "' + new_artists.map(&:name).join('". "') + '"'
+
+            elsif cmd == 'continue' || cmd == 'c'
+                next
+
+            elsif cmd == 'modify' || cmd == 'm'
+                puts
+                print "  New artist name: "
+                new_name = STDIN.gets.chomp
+                print "  Confirm name change '#{artist.name}' -> '#{new_name}'. (y/n)"
+                if STDIN.gets.chomp == 'y'
+                    artist.name = new_name
+                    artist.save!
+                    puts "Updated artist."
+                else
+                    puts "Ok. Skipping..."
+                    next
+                end
+
+            elsif cmd == 'delete' || cmd == 'd'
+                print "  Are you sure you want to delete? (y/n)"
+                if STDIN.gets.chomp == 'y'
+                    artist.delete
+                    puts "Deleted artist"
+                    next
+                else
+                    puts "Ok. not deleting"
+                end
+            elsif cmd == ''
+                "do nothing"
+            else 
+                puts "Unrecognized command: '#{cmd}'. Skipping..."
+            end
+
+            # Add soundcloud uri
             print "  Soundcloud uri: "
-            #entered_uri = STDIN.gets.chomp
-            entered_uri = 'https://soundcloud.com/diegos-umbrella'
+            entered_uri = STDIN.gets.chomp
             if entered_uri.present?
                 tracks_info = client.get('/resolve.json', url: entered_uri)
-                puts tracks_info
                 if tracks_info['kind'] == 'user'
                     user_id = tracks_info['id']
+                    artist.soundcloud_id = user_id
+                    puts "user_id: #{user_id}"
+                    artist.save!
+                    artist.update_tracks(client)
                 else
-                    tracks_id = tracks_info['id']
-                    user_id = tracks_info['user'].try(:[], 'id')
+                    print "Not a user url. skipping..."
                 end
-                artist.soundcloud_id = user_id
-                puts "user_id: #{user_id}"
-
-                tracks = client.get("/users/#{user_id}/tracks.json")
-                binding.pry
             else
                 puts "skipped"
             end
