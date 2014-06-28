@@ -101,6 +101,7 @@ namespace :tickets do
 		venue_json = JSON.load(open(ticketfly_announced_link + venue.ticketfly_venue_id.to_s))
 		venue_json['events'].each do |event_data|
 			data = {'ticket_source' => 'ticketfly', 'venue_id' => venue.id}
+            puts event_data
 			remap_response.each do |source_key, dest_key|
 				data[dest_key] = event_data[source_key]
 			end
@@ -111,7 +112,7 @@ namespace :tickets do
 				data['age'] = '18+'
 			end
 
-			event = Event.where(ticket_id: event_data['id']).first || Event.new
+			event = Event.where(ticket_id: event_data['id'].try(:to_str)).first || Event.new
 			event.update_attributes(data)
 			event.save!
 		end
