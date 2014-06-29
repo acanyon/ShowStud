@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: showstud
   pool: 5
-  username: f3
+  username: acanyon
   host: localhost
   password: 
 
@@ -12,7 +12,7 @@ test:
   encoding: unicode
   database: showstud_test
   pool: 5
-  username: f3
+  username: acanyon
   password: 
 
 
