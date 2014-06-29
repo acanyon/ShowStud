@@ -14,6 +14,7 @@ namespace :events do
             end
             puts "Edit info for Artist: '" + artist.name + "'"
             puts "    #{artist.event.ticket_url}"
+            `echo "#{artist.name}" | pbcopy`
 
             print " What would you like to do? ('continue', 'split' (on commas), 'modify' (name), 'delete': "
             cmd = STDIN.gets.chomp.strip
